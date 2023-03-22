@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+   <head><meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8">	
+   
+   <title>Rubik's Cube</title>
+
+   <script id = "vertex-shader" type = "x-shader/x-vertex">
+   attribute vec4 vPosition;
+   attribute vec2 vTextCoord;
+
+   uniform mat4 mvMatrix;
+   uniform mat4 pMatrix;
+
+   varying vec2 fTextCoord;
+
+   void main()
+   {
+      gl_Position = pMatrix*mvMatrix*vPosition;
+      fTextCoord = vTextCoord;
+   }
+   </script>
+
+   <script id = "fragment-shader" type = "x-shader/x-fragment">
+   precision mediump float;
+
+   varying vec2 fTextCoord;
+   uniform sampler2D texture;
+
+   void main()
+   {
+      gl_FragColor = texture2D(texture, fTextCoord);
+   }
+   </script>
+
+   <script type = "text/javascript" src = "webgl-utils.js"></script>
+   <script type = "text/javascript" src = "initShaders.js"></script>
+   <script type = "text/javascript" src = "MV.js"></script>
+   <script type = "text/javascript" src = "RubiksCube.js"></script>
+
+</head>
+
+<body>
+   <div style = "width: 600px; height: 600px; margin: 0px auto; border: 2px solid rgb(0, 0, 0);">
+      <canvas id = "gl-canvas" width = "600" height = "600">
+         Your browser does not support the HTML5 canvas element
+      </canvas>
+   </div>
+
+   <div style="text-align: left;">
+      <section> 
+         <p>
+            <b>Rovshan Bayramov</b>
+            <br>
+            <b>Rubik's Cube</b>
+            <br>
+            <br>
+            <i><b>Instructions:</b></i>
+            <br>
+            <br>
+            <b>Hold and Drag the cube</b> to which direction you want to rotate
+            <br>
+            <b>Press S</b> for changing colors of the cube once
+            <br>
+            <b>Press and Hold S</b> for changing colors of the cube as much as you want
+            <br>
+            <b>Press N</b> for solving new cube
+         </p>
+      </section>
+   </div>
+</body>
+
+</html>
